@@ -1,0 +1,6 @@
+{{ inventory_hostname }} {
+  log stdout
+  errors stderr
+  tls {{ admin_email }}
+  root /etc/caddy/html
+}

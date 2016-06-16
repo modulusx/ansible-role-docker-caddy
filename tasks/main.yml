@@ -1,0 +1,27 @@
+- name: "Create conf and volume directories"
+  file: path={{ item.path }} state=directory recurse=yes
+  with_items:
+    - { path: '/docker/caddy' }
+    - { path: '/docker/caddy/vhosts' }
+    - { path: '/docker/caddy/html' }
+
+- name: "Create default Caddyfile from template"
+  template: src=Caddyfile.j2 dest=/docker/caddy/Caddyfile
+
+- name: "Copy static website files"
+  copy: src={{ item.path }} dest=/docker/caddy/html/{{ item.path }}
+  with_items:
+    - { path: 'index.html' }
+    - { path: 'rc51.jpg' }
+
+- name: "Copy docker-compose.yml"
+  copy: src=docker-compose.yml dest=/docker/caddy/docker-compose.yml
+
+- name: "Pull docker images"
+  shell: 'docker pull {{ item.provider }}/{{ item.image }}:{{ item.tag }}'
+  with_items: "{{ docker_images }}"
+
+- name: "Start caddy container"
+  shell: '/usr/local/bin/docker-compose up -d'
+  args:
+    chdir: /docker/caddy/
