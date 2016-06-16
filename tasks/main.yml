@@ -21,7 +21,7 @@
   copy: src=docker-compose.yml dest=/docker/caddy/docker-compose.yml
 
 - name: "Pull docker images"
-  shell: 'docker pull {{ item.provider }}/{{ item.image }}:{{ item.tag }}'
+  shell: '/usr/bin/docker pull {{ item.provider }}/{{ item.image }}:{{ item.tag }}'
   with_items: "{{ docker_images }}"
 
 - name: "Start caddy container"
