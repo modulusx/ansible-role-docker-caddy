@@ -5,8 +5,11 @@
     - { path: '/docker/caddy/vhosts' }
     - { path: '/docker/caddy/html' }
 
-- name: "Create default Caddyfile from template"
-  template: src=Caddyfile.j2 dest=/docker/caddy/Caddyfile
+- name: "Create default Caddyfiles from templates"
+  template: src={{ item.src }} dest={{ item.dest }}
+  with_items:
+    - { src: 'Caddyfile.j2', dest: '/docker/caddy/Caddyfile' }
+    - { src: 'vhost.j2', dest: '/docker/caddy/vhosts/server' }
 
 - name: "Copy static website files"
   copy: src={{ item.path }} dest=/docker/caddy/html/{{ item.path }}
