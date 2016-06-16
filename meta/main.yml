@@ -1,7 +1,7 @@
 galaxy_info:
-  author: your name
-  description: your description
-  company: your company (optional)
+  author: Matt Kunkel matt@mrkunkel.com
+  description: Configures Caddy on Docker on an EC2 Instance running modulusx.docker-host
+  company: mrkunkel.com
 
   # If the issue tracker for your role is not on github, uncomment the
   # next line and provide a value
@@ -14,7 +14,7 @@ galaxy_info:
   # - GPLv3
   # - Apache
   # - CC-BY
-  license: license (GPLv2, CC-BY, etc)
+  license: MIT
 
   min_ansible_version: 1.2
 
@@ -85,9 +85,9 @@ galaxy_info:
   #  versions:
   #  - all
   #  - 2012R2
-  #- name: Amazon
-  #  versions:
-  #  - all
+  - name: Amazon
+    versions:
+    - all
   #  - 2013.03
   #  - 2013.09
   #- name: GenericBSD
