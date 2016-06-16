@@ -24,6 +24,9 @@
   shell: '/usr/bin/docker pull {{ item.provider }}/{{ item.image }}:{{ item.tag }}'
   with_items: "{{ docker_images }}"
 
+- name: "Create External Network"
+  shell: '/usr/bin/docker network create external_network'
+
 - name: "Start caddy container"
   shell: '/usr/local/bin/docker-compose up -d'
   args:
